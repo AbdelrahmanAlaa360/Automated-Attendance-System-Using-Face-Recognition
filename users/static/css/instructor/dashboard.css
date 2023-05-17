@@ -1,0 +1,487 @@
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+:root{
+    /* ===== Colors ===== */
+    --primary-color: #12566a;
+    --panel-color: #FFF;
+    --text-color: #000;
+    --black-light-color: #707070;
+    --border-color: #e6e5e5;
+    --toggle-color: #DDD;
+    --box1-color: #98d5e7;
+    --box2-color: #98d5e7;
+    --box3-color: #98d5e7;
+    --title-icon-color: #fff;
+    
+    /* ====== Transition ====== */
+    --tran-05: all 0.5s ease;
+    --tran-03: all 0.3s ease;
+    --tran-03: all 0.2s ease;
+}
+
+.main{
+    position: relative;
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.main .nav .home i{
+    padding-right: 15px;
+    font-size: 25px;
+}
+
+/* all here is for the nav */
+
+.main button  {
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+.main button a{
+    color:white;
+    text-decoration: none;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+.nav{
+
+    position:fixed;
+
+    display: flex;
+    background-color: var(--primary-color);
+    color: black;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 65px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+.lastNav{
+    display: flex;
+    align-items: center;
+}
+.searching{
+    padding: 10px 10px 10px 40px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #999;
+    width: 400px;
+}
+.search{
+    position: relative;
+}
+.search i.fa-solid{
+position: absolute;
+top: 10px;
+left: 10px;
+font-size: 18px;
+color: #999;
+}
+.userName{
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+.not {
+    margin-right: 25px;
+}
+.not i.fa-sharp {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+}
+.userView{
+    position: relative;
+    top: -2.5px;
+
+    height: 60px;
+    margin-left: 40px;
+}
+.pic{
+    
+    width: 45px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.userData{
+    display: flex;
+    margin-left: 15px;
+}
+
+/*  end for the nav data */
+
+/* start of down div */
+.down{
+margin-top: 5%;
+width: 100%;
+}
+
+.dashboard{
+    background-color: var(--panel-color);
+    min-height: 100vh;
+    width: 100%;
+    padding: 10px 14px;
+    transition: var(--tran-05);
+}
+nav.close ~ .dashboard{
+    left: 73px;
+    width: calc(100% - 73px);
+}
+
+.top img{
+    width: 40px;
+    border-radius: 50%;
+}
+.tit-mod{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.dash-content .title{
+    display: flex;
+    align-items: center;
+    margin: 15px 0 40px 0;
+}
+.dash-content .title i{
+    height: 35px;
+    width: 35px;
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    color: var(--title-icon-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+.dash-content .title .text{
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-left: 10px;
+}
+.dash-content .new-course{
+    display: flex;
+}
+.dash-content .new-course button{
+    border-radius: 5px;
+    height: 45px;
+}
+
+.courses-menu{
+    margin-top: 3%;
+    width:auto;
+    height:auto;
+}
+.dash-content .courses{
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 80%;
+    float: left;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.dash-content .courses .course{
+    position: relative;
+    left: 5%;
+    width: 20%;
+    height: auto;
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin: 20px;
+    background-color: #98d5e7;
+    display: inline-block;
+}
+.one{
+    margin-left: 20px;
+}
+.courses .course i{
+    font-size: 35px;
+    color: var(--text-color);
+}
+
+.courses .course .text{
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+.courses .course .time, .place, .day{
+    font-size: 15px;
+}
+.place{
+    position: absolute;
+    bottom: 4.5%;
+    right: 5%;
+}
+.overview  .left-arrow {
+position: absolute;
+top: 30%;
+transform: translateY(-50%);
+background-color: transparent;
+border: none;
+color: #000;
+font-size: 50px;
+cursor: pointer;
+right: 10px;
+}
+
+.overview .right-arrow {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: #000;
+    font-size: 50px;
+    cursor: pointer;
+    left: 10px;
+}
+
+/* timetable section */
+.timetable{
+    position: absolute;
+    top:55%;
+    left:1%;
+    right:45%;
+}
+.today {
+    height: 250px;
+    border-right: solid black;
+}
+.timetable .title{
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.timetable .title i{
+    margin-right: 1%;
+    height: 40px;
+    width:35px
+}
+
+.today .lecture{
+position: relative;
+top:5%;
+left: 5%;
+width: 90%;
+padding:15px;
+border: solid black;
+border-radius: 5px;
+margin-bottom: 20px;
+background-color: #c6ebf6;
+height:70px;
+}
+.lecture .name{
+    font-weight: 500;
+}
+.lecture .number{
+    position: absolute;
+    right:45%;
+}
+.lecture .attendance{
+position: absolute;
+right:15%;
+}
+.lecture a{
+position: absolute;
+right: 1%;
+top: 10%;
+color: #000;
+background-color: #c6ebf6;
+padding:8px;
+border-radius: 5px;
+cursor: pointer;
+border: 1px solid white;
+}
+.lecture button:hover{
+    background-color: azure;
+}
+/* end of timetable section*/
+
+/*progress section*/
+.progress-view{
+    position: absolute;
+    top:55%;
+    left:60%;
+    right:3%;
+    width: auto;
+    height:350px;
+
+}
+
+.progress-view .title{
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 28px;
+}
+.progress-view .title i{
+    margin-right: 1%;
+    height: 40px;
+    width:35px
+}
+.prog1,.prog2,.prog3{
+    position: relative;
+    left:5%;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color:  #c6ebf6;
+    height:70px;
+    border: solid black;
+}
+.prog1 .content .name,
+.prog2 .content .name,
+.prog3 .content .name{
+    position: relative;
+    left: 5%;
+    font-weight: 500;
+}
+.prog1 .content .number,
+.prog2 .content .number,
+.prog3 .content .number{
+position:absolute;
+right: 6%;
+
+}
+.progress-bar {
+    position: relative;
+    left:5%;
+    width: 90%;
+    height: 10px;
+    background-color: rgb(248, 199, 199);
+}
+
+.progress1 ,
+.progress2,
+.progress3{
+    height: 100%;
+    background-color: #0077be;
+    width: 0;
+    transition: width 0.5s ease-in-out;
+}
+
+/*end of progress section*/
+@media (max-width: 1000px) {
+    nav{
+        width: 73px;
+    }
+    nav.close{
+        width: 250px;
+    }
+    nav .logo_name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav.close .logo_name{
+        opacity: 1;
+        pointer-events: auto;
+    }
+    nav li a .link-name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav.close li a .link-name{
+        opacity: 1;
+        pointer-events: auto;
+    }
+    nav ~ .dashboard{
+        left: 73px;
+        width: calc(100% - 73px);
+    }
+    nav.close ~ .dashboard{
+        left: 250px;
+        width: calc(100% - 250px);
+    }
+    nav ~ .dashboard .top{
+        left: 73px;
+        width: calc(100% - 73px);
+    }
+    nav.close ~ .dashboard .top{
+        left: 250px;
+        width: calc(100% - 250px);
+    }
+    .activity .activity-data{
+        overflow-X: scroll;
+    }
+    .no-decoration {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+@media (max-width: 780px) {
+    .dash-content .courses .course{
+        width: calc(100% / 2 - 15px);
+        margin-top: 15px;
+    }
+}
+@media (max-width: 560px) {
+    .dash-content .courses .course{
+        width: 100% ;
+    }
+}
+@media (max-width: 400px) {
+    nav{
+        width: 0px;
+    }
+    nav.close{
+        width: 73px;
+    }
+    nav .logo_name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav.close .logo_name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav li a .link-name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav.close li a .link-name{
+        opacity: 0;
+        pointer-events: none;
+    }
+    nav ~ .dashboard{
+        left: 0;
+        width: 100%;
+    }
+    nav.close ~ .dashboard{
+        left: 73px;
+        width: calc(100% - 73px);
+    }
+    nav ~ .dashboard .top{
+        left: 0;
+        width: 100%;
+    }
+    nav.close ~ .dashboard .top{
+        left: 0;
+        width: 100%;
+    }
+}
+/* end of right div */

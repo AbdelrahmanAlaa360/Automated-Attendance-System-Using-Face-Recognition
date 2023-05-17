@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Attendance</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/attendance.css' %}">
+
+    
+    <script src="https://kit.fontawesome.com/02dd37e960.js" crossorigin="anonymous"></script>   
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Attendance</h1>
+
+        <div class="attendance">
+            {% for student in object.course.user.all %}
+                {% if student.is_student %}
+                <div class="student">
+                    <span span class="name"> {{student.username}}</span>
+                    <span class="email"> {{student.email}} </span>
+                    <span class="status">
+                        {% if student in object.user.all%}
+                        <i class="fa-li fa fa-check-circle" style="color:green"></i>  
+                        {% else %}
+                      <i class="fa fa-times-circle" style="color:red; padding-right:13px"></i>
+                        {% endif %}
+                    </span>          
+                </div>
+                {% endif %}
+            {% endfor %}
+       </div> 
+    </div>
+  </body>
+</html>

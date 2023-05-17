@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-5 col-md-8">
+        <div class="card shadow-lg">
+          <div class="card-body">
+            <h1 class="card-title text-center mb-4">Login</h1>
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-floating mb-3">
+                {{ form.username|as_crispy_field }}
+                <label for="{{ form.username.id_for_label }}"></label>
+              </div>
+              <div class="form-floating mb-3">
+                {{ form.password|as_crispy_field }}
+                <label for="{{ form.password.id_for_label }}"></label>
+              </div>
+              {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                  {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                      {{ field|title }}: {{ error|escape }}
+                      <br>
+                    {% endfor %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+              <button type="submit" class="btn btn-primary w-100 mt-3">Login</button>
+            </form>
+            <div class="text-center mt-3">
+              <p>Don't have an account? <a href="{% url 'student-signup' %}">Register here</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

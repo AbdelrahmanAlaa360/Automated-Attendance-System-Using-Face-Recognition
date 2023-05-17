@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+    <head>
+         <meta charset="utf-8">
+         <title>Welcome</title>
+         <link rel="stylesheet" href="{% static 'css/welcome.css' %}">
+         <script src="https://kit.fontawesome.com/02dd37e960.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+       <div class="container">
+           
+          <p> Welcome To Our Automated Attendance System </p>
+
+          {% if user.is_authenticated and user.is_teacher %}
+            <a href="{% url 'instructor-dashboard' %}"> Start </a>
+          {% elif user.is_authenticated and user.is_student%}
+          <a href="{% url 'student-dashboard' %}"> Start </a>
+          {% else %}
+          <a href="{% url 'login' %}"> Start </a>
+         {% endif %}
+       </div>
+       
+
+    </body>
+</html>

@@ -1,0 +1,150 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashoard</title>
+    <link rel="stylesheet" href="{% static  'css/instructor/dashboard.css'%}">
+    <link rel="stylesheet" href="{% static  'css/instructor/all.min.css'%}">
+    <script src="{% static 'js/dashboard.js'%}"></script>
+    <script src="https://kit.fontawesome.com/02dd37e960.js" crossorigin="anonymous"></script>
+</head>
+<body>
+   <div class="main">
+        <div class="nav">
+           <button class="home"><a href="welcome.html"><i class="fa-solid fa-landmark"> AFRA </i></a></button>
+            <div class="logo">
+                
+            </div>
+            <div class="search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="searching" placeholder=" Search Your Courses">
+            </div>
+            <div class="lastNav">
+                <button>
+                    <div class="not">
+                        <i class="fa-sharp fa-solid fa-bell"></i>
+                    </div>
+                </button>
+                <button class="userView">    
+                    <div class="userData">
+                        <img src="/images/img1.jpg" alt="" class="pic">
+                        <div class="userName">{{user.username}}</div>
+                    </div>
+                </button>
+                <a href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #f7f7f8;"></i></a>
+            </div>
+        </div>
+        
+      
+        <div class="down">
+            <section class="dashboard">
+                <div class="dash-content">
+                    <div class="overview">                     
+
+                        <div class="tit-mod">
+                            <div class="title">
+                                <i class="fa-brands fa-stack-overflow"></i>
+                                <span class="text">My Courses</span>
+                            </div>
+        
+                            <div class="new-course">
+                                <button id="newCourse">New Course</button>
+                            </div>
+                        </div>
+                        
+                        <div class="courses-menu">
+                            <button class="left-arrow">&lt;</button>
+                            <div class="courses">
+                                {% for course in courses %}
+                                    <div class="course ">
+                                        <i class="fa-solid fa-laptop-code"></i>
+                                        <div><a class="text" href="{% url 'course-detail' course.id %}">{{ course.name }}</a></div>
+                                        <div class="day">{{course.sessionDay}}</div>
+                                        <div class="time">{{course.seessionTime}}</div>
+                                        <hr><br>
+                                        <span>place</span>
+                                        <div class="place">{{course.sessionPlace}}</div>
+                                    </div>
+                                {% endfor %}
+                        </div>
+                        <button class="right-arrow">&gt;</button>
+                        </div>
+                    
+
+                        <div class="activity">
+                            <section class="timetable">
+                                <div class="title">
+                                    <i class="fa-regular fa-hourglass-half"></i>
+                                    <span>Recent Lectures</span>
+                                </div>
+    
+                                <div class="today">
+                                    {% for lecture in lectures %}
+                                        <div class="lecture">
+                                                <span class="name"> {{lecture.course.name}}</span>
+                                                <span class="number"> {{lecture.name}}</span>
+                                                <span class="attendance"> {{lecture.user.all.count}}/{{lecture.course.user.all.count|add:"-1"}}</span>
+                                                <a href="{% url 'lecture-detail' lecture.id %}" >&gt;</a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </section>
+            
+                            <section class="progress-view">
+                                    <div class="title">
+                                        <i class="fa-solid fa-gauge-high"></i>
+                                        <span>Progress</span>
+                                    </div>
+    
+                                    <div class="prog1">
+                                        <div class="progress-bar">
+                                            <div class="progress1"></div>
+                                        </div>
+    
+                                        <div class="content">
+                                            <span class="name">Machine learning</span>                         
+                                            <span class="number">5/12</span>
+                                        </div>
+                                </div>
+    
+                                <div class="prog2">
+                                        <div class="progress-bar">
+                                        <div class="progress2"></div>
+                                        </div>
+    
+                                        <div class="content">
+                                        <span class="name">Statictics</span>                         
+                                        <span class="number">2/12</span>
+                                        </div>       
+                                </div>
+    
+                                <div class="prog3">
+                                    <div class="progress-bar">
+                                    <div class="progress3"></div>
+                                    </div>
+    
+                                    <div class="content">
+                                    <span class="name">Data Analysis</span>                         
+                                    <span class="number">3/12</span>
+                                    </div>
+    
+                            </section>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script>
+        const newCourseBtn = document.getElementById('newCourse');
+        newCourseBtn.addEventListener('click', () => {
+            window.location.href = "{% url 'create-course' %}";
+        });
+
+    </script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>

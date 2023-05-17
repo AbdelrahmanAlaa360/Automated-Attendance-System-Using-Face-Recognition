@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Course Lectures</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/courselectures.css' %}">
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>{{object.name}} Lectures</h1>
+        {% for lecture in object.lecture.all %}
+        
+        <div class="new-course">
+          <button class="new_lecture" id="newCourse">New Course</button>
+      </div>
+        <div class="lectures">
+                <div class="lecture">
+                    <span class="name"> {{lecture.name}}</span>
+                    <span class="date"> {{lecture.data}}</span>
+                    <span class="attendance"> {{lecture.user.count}}/{{course.user.count|add:"-1"}}</span>
+                    <a href="{% url 'lecture-detail' pk=lecture.pk %}" class="btn">&gt</a>
+                </div>
+       </div>
+       {% endfor %} 
+    </div>
+    <script>
+      const newCourseBtn = document.getElementById('newCourse');
+      newCourseBtn.addEventListener('click', () => {
+          window.location.href = "{% url 'run-model' %}";
+      });
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/student/master.css' %}">
+    <link rel="stylesheet" href="{% static 'css/student/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/student/normalize.css' %}">
+    <script src="https://kit.fontawesome.com/02dd37e960.js" crossorigin="anonymous"></script>
+</head>
+<body>
+   <div class="main">
+            <div class="nav">
+            <button class="home"><i class="fa-solid fa-landmark"> AFRA </i></button>
+                <div class="logo">
+                    
+                </div>
+                <div class="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" class="searching" placeholder=" Search Your Courses">
+                </div>
+                <div class="lastNav">
+                    <button>
+                        <div class="not">
+                            <i class="fa-sharp fa-solid fa-bell"></i>
+                        </div>
+                    </button>
+                    <button class="userView">    
+                        <div class="userData">
+                            <img src="/imgsHub/DSC_0806.jpg3434.jpg" alt="" class="pic">
+                            <div class="userName">{{user.username}}</div>
+                        </div>
+                    </button>
+                    <a href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #f7f7f8;"></i></a>
+                </div>
+            </div>
+        
+        <div class="left">
+
+            <a href="{% url 'student-dashboard' %}" class="sideBarHead">
+                <h2 >My courses</h2>
+            </a>
+            <hr >
+
+            <div class="courses">
+                <ul>   
+                    {% for course in courses %}
+                    <li>
+                        <a href="{% url 'student-coruse-detail' course.id %}" class="link">
+                            <span class="text"> {{course.name}} </span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+            <section class="dashboard">
+                
+                <div class="dash-content">
+                    <div class="overview">
+                        <div class="title">
+                            <i class="fa-solid fa-gauge-high"></i>
+                            <span class="text">Dashboard</span>
+                        </div>
+        
+                        <div class="boxes">
+                            <div class="box box1">
+                                <i class="fa-solid fa-book"></i>
+                                <span class="text">Total Sessions</span>
+                                <span class="number">{{total_sessions}}</span>
+                            </div>
+                            <div class="box box2">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <span class="text">Attended</span>
+                                <span class="number">{{attended}}</span>
+                            </div>
+                            <div class="box box3">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                                <span class="text">Absent</span>
+                                <span class="number">{{absent}}</span>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="activity">
+                        <div class="title">
+                            <i class="fa-regular fa-clock"></i>
+                            <span class="text">Recent Activity</span>
+                        </div>
+        
+                        <div class="activity-data">
+                            <div class="data names">
+                                <span class="data-title">Lecturer Name</span>
+                                {% for name in lecture_names %}
+                                    <span class="data-list">{{name}}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="data email">
+                                <span class="data-title">Course Name</span>
+                                {% for name in lecture_course %}
+                                <span class="data-list">{{name}}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="data joined">
+                                <span class="data-title">Date</span>
+                                {% for date in lecture_date %}
+                                <span class="data-list">{{date}}</span>
+                                {% endfor %}
+                                
+                            </div>
+                            <div class="data type">
+                                <span class="data-title">Type</span>
+                                {% for type in lecture_type %}
+                                <span class="data-list">{{type}}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="data status">
+                                <span class="data-title">Status</span>
+                                {% for status in lecture_status %}
+                                    {% if status %}
+                                    <span class="data-list"><i class="fa-solid fa-circle-check fa-xl" style="color: #18d82e;"></i></span>
+                                    {% else %}
+                                    <span class="data-list"><i class="fa-solid fa-circle-xmark fa-xl" style="color: #ff1a1a;"></i></span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+   </div>
+</body>
+</html>
