@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import CourseForm
 from .models import Course,Lecture
 from django.contrib.auth.decorators import user_passes_test
-from model.test import sayHi
+import subprocess
 from django.views.generic import (
     ListView,
     DetailView,
@@ -35,7 +35,8 @@ class LectureDetailView(DetailView):
 
 
 
-def run_model(request):
+def start_model(request):
+    command = ['python', 'C:/My Files/Projects/automation-face-attendance/model/face_detect.py']
+    subprocess.run(command)
 
-    sayHi()
-    return render(request,'404page.html')
+    return render(request,'course/modlePage.html')
