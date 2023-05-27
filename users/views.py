@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect ,get_object_or_404
-from .forms import UserRegisterForm,CustomAuthenticationForm
+from .forms import UserRegisterForm,CustomAuthenticationForm,ProfileImageForm,TrainingImageForm
+
 from django.contrib.auth import authenticate, login ,logout
 from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse_lazy
-from  .models import User
+from  .models import User , ProfileImage,TrainImage
 from course.models import Course,Lecture
 from django.views.generic import (
     DetailView,
@@ -18,6 +19,7 @@ def student_signup(request):
         if form.is_valid():
             form.instance.is_student=True
             form.save()
+            ProfileImage.objects.create(user=form.instance)
             return redirect('login')
     else:
         form = UserRegisterForm()
@@ -29,6 +31,7 @@ def instructor_signup(request):
         if form.is_valid():
             form.instance.is_teacher=True
             form.save()
+            ProfileImage.objects.create(user=form.instance)
             return redirect('login')
     else:
         form = UserRegisterForm()
@@ -138,3 +141,30 @@ def student_course_detail(request,pk):
     context['absent']=absent
     context['lectures']=sorted_lectures
     return render(request,'student/course.html' ,context)
+
+
+def instructor_profile(request):
+
+    user = request.user
+    profileImage = user.profile
+
+    if request.method == 'POST':
+
+        updateImageForm = ProfileImageForm(request.POST, request.FILES)
+        trainingForm = TrainingImageForm(request.POST, request.FILES)
+
+        if updateImageForm.is_valid():
+            profileImage.image = updateImageForm.cleaned_data['image']
+            profileImage.save()
+            return redirect('instructor-profile')
+        if trainingForm.is_valid():
+            for image in request.FILES.getlist('images'):
+                TrainImage.objects.create(user=user, image=image)
+            return redirect('instructor-profile')
+    else:
+        updateImageForm = ProfileImageForm()
+        trainingForm = TrainingImageForm()
+
+    return render(request, 'instructor/profile.html', {'profileImageForm': updateImageForm ,'trainingForm':trainingForm})
+
+

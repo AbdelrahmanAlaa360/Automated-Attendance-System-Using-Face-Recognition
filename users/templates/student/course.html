@@ -27,9 +27,13 @@
                         <i class="fa-sharp fa-solid fa-bell"></i>
                     </div>
                 </button>
-                <button class="userView">    
+                <button class="userView" id="toProfile">    
                     <div class="userData">
-                        <img src="/imgsHub/DSC_0806.jpg3434.jpg" alt="" class="pic">
+                        {% if user.profile.image %}
+                            <img src="{{user.profile.image.url}}" alt="" class="pic">
+                        {% else %}
+                            <img src="../../../media/.jpg" alt="" class="pic">
+                        {% endif %}
                         <div class="userName">{{user.username}}</div>
                     </div>
                 </button>
@@ -131,5 +135,11 @@
             </section>
         </div>
    </div>
+   <script>
+            const toProfile = document.getElementById('toProfile');
+        toProfile.addEventListener('click', () => {
+            window.location.href = "{% url 'instructor-profile' %}";
+        });
+   </script>
 </body>
 </html>

@@ -27,9 +27,13 @@
                         <i class="fa-sharp fa-solid fa-bell"></i>
                     </div>
                 </button>
-                <button class="userView">    
+                <button class="userView" id="toProfile">    
                     <div class="userData">
-                        <img src="/images/img1.jpg" alt="" class="pic">
+                        {% if user.profile.image %}
+                            <img src="{{user.profile.image.url}}" alt="" class="pic">
+                        {% else %}
+                            <img src="{% static 'images/.jpg' %}" alt="" class="pic">
+                        {% endif %}
                         <div class="userName">{{user.username}}</div>
                     </div>
                 </button>
@@ -142,6 +146,11 @@
         const newCourseBtn = document.getElementById('newCourse');
         newCourseBtn.addEventListener('click', () => {
             window.location.href = "{% url 'create-course' %}";
+        });
+
+        const toProfile = document.getElementById('toProfile');
+        toProfile.addEventListener('click', () => {
+            window.location.href = "{% url 'instructor-profile' %}";
         });
 
     </script>
