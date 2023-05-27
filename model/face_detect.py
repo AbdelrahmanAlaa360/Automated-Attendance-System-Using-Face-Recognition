@@ -9,10 +9,10 @@ start = time.time()
 train = 0
 if(train == 1):
     train_on_dataset()
-video_capture = cv2.VideoCapture(1)
+video_capture = cv2.VideoCapture(0)
 
-known_face_encodings = np.load("C:/My Files/Projects/automation-face-attendance/model/face_encodings_numpy.npy")
-known_face_names = np.load("C:/My Files/Projects/automation-face-attendance/model/names_numpy.npy")
+known_face_encodings = np.load("D:/Projects/Automated-Attendance-System-Using-Face-Recognition/model/face_encodings_numpy.npy")
+known_face_names = np.load("D:/Projects/Automated-Attendance-System-Using-Face-Recognition/model/names_numpy.npy")
 
 # Initialize some variables
 face_locations = []
@@ -39,9 +39,9 @@ while(time.time() < future):
     if process_this_frame:
         # Resize frame of video to 1/4 size for faster face recognition processing
         small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
-
+        
         # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
-        rgb_small_frame = small_frame[:, :, ::-1]
+        rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
         
         # Find all the faces and face encodings in the current frame of video
         face_locations = face_recognition.face_locations(rgb_small_frame)

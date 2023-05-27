@@ -36,7 +36,6 @@ class LectureDetailView(DetailView):
 
 
 def start_model(request):
-    command = ['python', 'C:/My Files/Projects/automation-face-attendance/model/face_detect.py']
+    command = ['python', 'D:/Projects/Automated-Attendance-System-Using-Face-Recognition/model/face_detect.py']
     subprocess.run(command)
-
     return render(request,'course/modlePage.html')
