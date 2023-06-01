@@ -8,7 +8,7 @@ def train_on_dataset():
     print("==================\n")
     known_face_encodings = []
     known_face_names = []
-    images_path = "C:\My Files\Projects\Face Recognition\images"
+    images_path = "D:\Projects\Automated-Attendance-System-Using-Face-Recognition\media\profile_pics"
     subfolders = [ f.path for f in os.scandir(images_path) if f.is_dir() ]
     for subfolder in subfolders:
         images_path = glob.glob(subfolder+'/*')

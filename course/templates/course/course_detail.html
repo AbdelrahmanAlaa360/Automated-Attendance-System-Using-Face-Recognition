@@ -29,7 +29,7 @@
     <script>
       const newCourseBtn = document.getElementById('newCourse');
       newCourseBtn.addEventListener('click', () => {
-          window.location.href = "{% url 'start-model' %}";
+          window.location.href = "{% url 'start-model' id=object.id %}";
       });
 
   </script>
