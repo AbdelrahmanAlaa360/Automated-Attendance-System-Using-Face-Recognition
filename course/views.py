@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import CourseForm
 from .models import Course,Lecture
 from django.contrib.auth.decorators import user_passes_test
+from users.models import User
 import subprocess
 from django.views.generic import (
     ListView,
@@ -35,7 +36,23 @@ class LectureDetailView(DetailView):
 
 
 
-def start_model(request):
+def start_model(request, id):
+    #command = ['python', 'E:/GP github/automation-face-attendance/model/face_detect.py']
     command = ['python', 'D:/Projects/Automated-Attendance-System-Using-Face-Recognition/model/face_detect.py']
     subprocess.run(command)
+    course = Course.objects.get(id = id)
+    with open('D:/Projects/Automated-Attendance-System-Using-Face-Recognition/attendance.txt', 'r') as file:
+        lines = file.readlines()
+        users = []
+        for line in lines:
+            if line[-1] == '\n':
+                line = line.rstrip('\n')
+            if(line == "Unknown"):
+                continue
+            else:
+                user = User.objects.get(username = line)
+                users.append(user)
+    lecture = Lecture.objects.create(name = "Lecture" , course = course)
+    lecture.user.set(users)
+    print(course)
     return render(request,'course/modlePage.html')

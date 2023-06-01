@@ -11,8 +11,9 @@ if(train == 1):
     train_on_dataset()
 video_capture = cv2.VideoCapture(0)
 
-known_face_encodings = np.load("D:/Projects/Automated-Attendance-System-Using-Face-Recognition/model/face_encodings_numpy.npy")
-known_face_names = np.load("D:/Projects/Automated-Attendance-System-Using-Face-Recognition/model/names_numpy.npy")
+known_face_encodings = np.load("face_encodings_numpy.npy")
+known_face_names = np.load("names_numpy.npy")
+print(known_face_encodings)
 
 # Initialize some variables
 face_locations = []
@@ -98,3 +99,12 @@ end = time.time()
 time_taken = int(end - start)
 
 print("Program execution time = ", time_taken, "Sec")
+with open('attendance.txt', 'w') as file:
+    names_str='\n'.join(names)
+    file.truncate()
+    file.write(names_str)
+
+print(names)
+print(type(names))
+end = time.time()
+time_taken = int(end - start)

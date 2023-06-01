@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import User
 from datetime import datetime
+from django.utils import timezone
 
 class Course(models.Model):
     TYPE_CHOICES=[
@@ -33,7 +34,7 @@ class Course(models.Model):
     
 class Lecture(models.Model):
     name=models.CharField(max_length=255)
-    data=models.DateField()
+    data=models.DateField(default=timezone.now)
     type=models.CharField(max_length=255,null=True)
     course=models.ForeignKey(Course,on_delete=models.CASCADE,null=True,related_name='lecture')
     user=models.ManyToManyField(User,related_name='lecture',blank=True)
