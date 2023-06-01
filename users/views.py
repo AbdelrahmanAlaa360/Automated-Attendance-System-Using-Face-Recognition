@@ -167,4 +167,13 @@ def instructor_profile(request):
 
     return render(request, 'instructor/profile.html', {'profileImageForm': updateImageForm ,'trainingForm':trainingForm})
 
+def join_course(request):
+    if request.method=='POST':
 
+        code=request.POST.get('code')
+        if code:
+            course=get_object_or_404(Course,code=code)
+            request.user.courses.add(course)
+        print("REDIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+        return redirect('student-dashboard')
+    return render(request,'student/index.html')

@@ -2,7 +2,14 @@ from django.db import models
 from users.models import User
 from datetime import datetime
 from django.utils import timezone
+import random
+import string
 
+def generate_code():
+    length = 5
+    characters = string.ascii_uppercase + string.digits
+    code = ''.join(random.choice(characters) for _ in range(length))
+    return code
 class Course(models.Model):
     TYPE_CHOICES=[
             ('lecture','lecture')
@@ -23,6 +30,7 @@ class Course(models.Model):
     sessionHour=models.IntegerField(default=2)
     sessionDay=models.CharField(max_length=10,choices=DAYS_CHOICES,default='Sunday')
     type=models.CharField(max_length=10,choices=TYPE_CHOICES,default='lecture')
+    code = models.CharField(max_length=5, default=generate_code)
     seessionTime=models.TimeField(default=datetime.now)
     capturingTime=models.IntegerField(default=30)
     sessionPlace=models.CharField(max_length=10,null=True)
