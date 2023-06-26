@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect ,get_object_or_404
 from .forms import UserRegisterForm,CustomAuthenticationForm,ProfileImageForm,TrainingImageForm
-
+from datetime import datetime, time
 from django.contrib.auth import authenticate, login ,logout
 from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse_lazy
@@ -117,7 +117,7 @@ def student_dashboard(request):
     context['absent']=absent
     return render(request,'student/index.html' , context)
 
-
+@user_passes_test(lambda u: u.is_authenticated and u.is_student,login_url='404')
 def student_course_detail(request,pk):
     course = get_object_or_404(Course, id=pk)
     courses = Course.objects.filter(id__in=request.user.courses.values_list('id', flat=True))
@@ -143,7 +143,8 @@ def student_course_detail(request,pk):
     return render(request,'student/course.html' ,context)
 
 
-def instructor_profile(request):
+@user_passes_test(lambda u: u.is_authenticated ,login_url='404')
+def profile(request):
 
     user = request.user
     profileImage = user.profile
@@ -167,6 +168,7 @@ def instructor_profile(request):
 
     return render(request, 'instructor/profile.html', {'profileImageForm': updateImageForm ,'trainingForm':trainingForm})
 
+@user_passes_test(lambda u: u.is_authenticated and u.is_student,login_url='404')
 def join_course(request):
     if request.method=='POST':
 
@@ -174,6 +176,73 @@ def join_course(request):
         if code:
             course=get_object_or_404(Course,code=code)
             request.user.courses.add(course)
-        print("REDIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
         return redirect('student-dashboard')
     return render(request,'student/index.html')
+
+
+def schedule(request):
+
+    time_intervals = {
+    'Sunday': {
+        1: {'name': 'place'},
+        2: {'name': 'place'},
+        3: {'name': 'place'},
+        4: {'name': 'place'},
+        5: {'name': 'place'},
+    },
+    'Monday': {
+        1: {'name': 'place'},
+        2: {'name': 'place'},
+        3: {'name': 'place'},
+        4: {'name': 'place'},
+        5: {'name': 'place'},
+    },
+    'Tuesday': {
+        1: {'name': 'place'},
+        2: {'name': 'place'},
+        3: {'name': 'place'},
+        4: {'name': 'place'},
+        5: {'name': 'place'},
+    },
+    'Wednesday': {
+        1: {'name': 'place'},
+        2: {'name': 'place'},
+        3: {'name': 'place'},
+        4: {'name': 'place'},
+        5: {'name': 'place'},
+    },
+    'Thursday': {
+        1: {'name': 'place'},
+        2: {'name': 'place'},
+        3: {'name': 'place'},
+        4: {'name': 'place'},
+        5: {'name': 'place'},
+    }
+}
+
+    courses = Course.objects.filter(id__in=request.user.courses.values_list('id', flat=True))
+    eight_am = time(8, 0)  
+    ten_am = time(10, 0)  
+    twelve_pm = time(12, 0)  
+    two_pm = time(14, 0)  
+    four_pm = time(16, 0)  
+
+    for course in courses:
+        course_day=course.sessionDay
+        course_time=course.seessionTime
+        if course_time==eight_am:
+            time_intervals[course_day][1]['name']=course.name
+            time_intervals[course_day][1]['place']=course.sessionPlace
+        elif course_time==ten_am:
+            time_intervals[course_day][2]['name']=course.name
+            time_intervals[course_day][2]['place']=course.sessionPlace
+        elif course_time==twelve_pm:
+            time_intervals[course_day][3]['name']=course.name
+            time_intervals[course_day][3]['place']=course.sessionPlace
+        elif course_time==two_pm:
+            time_intervals[course_day][4]['name']=course.name
+            time_intervals[course_day][4]['place']=course.sessionPlace
+        else:
+            time_intervals[course_day][5]['name']=course.name
+            time_intervals[course_day][5]['place']=course.sessionPlace
+    return render(request,'student/schedule.html',{'coursesTime':time_intervals})

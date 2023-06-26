@@ -1,15 +1,19 @@
-{% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %} 
-{% block style %}
-<link rel="stylesheet" href="{% static  'css/instructor/dashboard.css'%}">
-<link rel="stylesheet" href="{% static  'css/instructor/all.min.css'%}">
-<script src="https://kit.fontawesome.com/02dd37e960.js" crossorigin="anonymous"></script>
-{% endblock %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static  'css/instructor/dashboard.css'%}">
+    <link rel="stylesheet" href="{% static  'css/instructor/all.min.css'%}">
+    <script src="https://kit.fontawesome.com/02dd37e960.js" crossorigin="anonymous"></script>
+    <title>Afra</title>
+</head>
+<body>
     <div class="main">
         <div class="nav">
-           <button class="home"><a href="welcome.html"><i class="fa-solid fa-landmark"> AFRA </i></a></button>
+           <button class="home"><a href="{%url 'welcome'%}"><i class="fa-solid fa-landmark"> AFRA </i></a></button>
             <div class="logo">
                 
             </div>
@@ -36,40 +40,65 @@
                 <a href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket" style="color: #f7f7f8;"></i></a>
             </div>
         </div>
-        <div class="container-fluid">
-
-            <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-            <h1 class="h3 mb-0 text-gray-800">Profile</h1>
-            </div>          
-    
-            <!-- Main Content Here -->
-            <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-3 my-5">
-                <img src="{{user.profile.image.url}}" class="rounded float-right" height="300px" width="300px">
+        <!-- <div class="container-fluid">
+            <div class="header">
             </div>
-            <div class="card o-hidden border-0 shadow-lg my-5 col-lg-5 info-box">
-                <div class="card-body f">
-                    <h2>{{user.first_name}} {{user.last_name}}</h2>
-                    <p><strong>Username: </strong> {{user.username}} </p>
-                    <p><strong>Email: </strong> {{user.email}} </p>
-
+          
+            <div class="row">
+              <div class="col-lg-2"></div>
+              <div class="col-lg-3 my-5">
+                <img src="{{user.profile.image.url}}" class="rounded float-right" height="300px" width="300px">
+              </div>
+              <div class="card-container col-lg-5 my-5">
+                <div class="card-body">
+                  <h2>{{user.first_name}} {{user.last_name}}</h2>
+                  <p><strong>Username: </strong>{{user.username}}</p>
+                  <p><strong>Email: </strong>{{user.email}}</p>
                 </div>
                 <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ profileImageForm }}
-                    <button type="submit" class="btn btn-primary">Change Image</button>
+                  {% csrf_token %}
+                  {{ profileImageForm }}
+                  <button type="submit" class="btn btn-primary">Change Image</button>
                 </form>
+              </div>
             </div>
-        </div>
-
-        </div>
-        <h3>help the model to recondoifj you will</h3>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ trainingForm }}
-            <button type="submit" class="btn btn-primary">Change Image</button>
-        </form>
+          
+            <h3>help the model to recondoifj you will</h3>
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ trainingForm }}
+              <button type="submit" class="btn btn-primary">Change Image</button>
+            </form>
+          </div> -->
     </div>
-   
-{% endblock content %}
+    <div class="container">
+
+        <div class="image-container">
+          <img src="{{user.profile.image.url}}" class="user-image" alt="User Image">
+        </div>
+        <div class="card">
+            <div class="card-body">
+              <h2>{{user.first_name}} {{user.last_name}}</h2>
+              <p><strong>Username: </strong>{{user.username}}</p>
+              <p><strong>Email: </strong>{{user.email}}</p>
+            
+            </div>
+            <form method="POST" enctype="multipart/form-data" class="image-form">
+                {% csrf_token %}
+                {{ profileImageForm }}
+                <button type="submit" class="btn-primary">Change Image</button>
+              </form>
+          </div>
+          <div class="card">
+            <div class="card-body">
+                <h3>Help our model get to know you well</h3>
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ trainingForm }}
+                  <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+          </div>
+      </div>
+</body>
+</html>
+

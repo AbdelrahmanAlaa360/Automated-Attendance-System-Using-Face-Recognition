@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+      <title> Schedule</title>
+      <link rel="stylesheet" href="{% static 'css/student/schedule.css' %}">
+      <script src="https://kit.fontawesome.com/02dd37e960.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">
+           
+            <h1>Studying Schedule</h1>
+            
+            <div class="title">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Time table</span>
+            </div>
+           <table>
+            <thead>
+                <tr>
+                    <td>Day</td>
+                    <td> 8 - 10 AM</td>
+                    <td> 10 - 12 PM </td>
+                    <td> 12 - 2 PM</td>
+                    <td> 2 - 4 PM</td>
+                    <td> 4 - 6 PM</td>
+                </tr>
+            </thead>
+            
+           <tbody>
+            {% for day, intervals in coursesTime.items %}
+            <tr>
+                <td>{{ day }}</td>
+                {% for interval in intervals.values %}
+                <td>
+                    {% if 'name' in interval and 'place' in interval %}
+                    <div class="content">
+                        <div class="name">{{ interval.name }}</div>
+                        <div class="place">{{ interval.place }}</div>
+                    </div>
+                    {% else %}
+                    <div class="content">
+                        <div class="name"></div>
+                        <div class="place"></div>
+                    </div>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            
+           </tbody>
+           </table>
+        </div>
+    </body>    
+</html>

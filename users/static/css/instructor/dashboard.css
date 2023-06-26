@@ -490,3 +490,110 @@ right: 6%;
     }
 }
 /* end of right div */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110vh;
+    flex-direction: column;
+  }
+  
+  .card {
+    width: 500px;
+    background-color: #d6d6d6;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .image-container {
+    margin-top: -50px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .user-image {
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+  }
+  
+  .image-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .custom-file-upload input[type="file"] {
+    display: none;
+  }
+  
+  .btn-primary {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #2980b9;
+  }
+
+  .attendance-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: right;
+    padding: 10px 20px;
+    background-color: #7ac6dc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .attendance-button .button-icon {
+    margin-right: 5px;
+  }
+  
+  .attendance-button:hover {
+    background-color: #56a7bf;
+  }
+  
+  

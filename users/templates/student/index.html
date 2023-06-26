@@ -40,7 +40,7 @@
                 </div>
             </div>
         
-        <div class="left">
+        <div class="left" style="position: relative;">
 
             <a href="{% url 'student-dashboard' %}" class="sideBarHead">
                 <h2 >My courses</h2>
@@ -57,6 +57,14 @@
                     </li>
                     {% endfor %}
                 </ul>
+                <div style="position: fixed; bottom: 15px; left: 10px;width:18%;">
+                    <hr style="width: 105%;margin-bottom: 8px;">
+                    <button class="scheduled-button" id="scheduled-id">
+                        <span class="icon"><i class="far fa-calendar-alt"></i></span>
+                        Scheduled
+                      </button>
+                </div>
+
             </div>
         </div>
         <div class="right">
@@ -64,16 +72,21 @@
                 
                 <div class="dash-content">
                     <div class="overview">
-                        <div class="title">
-                            <i class="fa-solid fa-gauge-high"></i>
-                            <span class="text">Dashboard</span>
-                            <span style="float:right">
-                                <form style="float:right" method="post" action="{% url 'join-course' %}">
-                                    {% csrf_token %}
-                                    <input type="text" id="code" placeholder="Enter Course Code" name="code">
-                                    <button type="submit">Join</button>
-                                  </form>
-                            </span>
+                        <div class="title" style="justify-content: space-between;">
+                            <div style="display: flex;">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <span class="text">Dashboard</span>
+                            </div>
+                            <div style="display: flex; justify-content: center;">
+                                <div style="text-align: right;">
+                                    <form method="post" action="{% url 'join-course' %}">
+                                        {% csrf_token %}
+                                        <input type="text" id="code" placeholder="Enter Course Code" name="code" style="padding: 10px; border-radius: 5px; border: 1px solid #98d5e7;">
+                                        <button type="submit" style="background-color: #98d5e7; color: white; padding: 10px 20px; border-radius: 5px; border: none; font-weight: bold;" onmouseover="this.style.backgroundColor='#63c2e1';" onmouseout="this.style.backgroundColor='#98d5e7';">Join</button>
+                                    </form>
+                                </div>
+                            </div>
+                            
                         </div>
                         <div class="boxes">
                             <div class="box box1">
@@ -147,6 +160,13 @@
     toProfile.addEventListener('click', () => {
     window.location.href = "{% url 'instructor-profile' %}";
 });
+    const toSchedulePage = document.getElementById('scheduled-id');
+    console.log(toSchedulePage);
+        toSchedulePage.addEventListener('click', () => {
+            window.location.href = "{% url 'schedule' %}";
+        });
+
+
 </script>
 </body>
 </html>
