@@ -17,13 +17,13 @@ class Course(models.Model):
         ]
     
     DAYS_CHOICES = [
-            ('mon', 'Monday'),
-            ('tue', 'Tuesday'),
-            ('wed', 'Wednesday'),
-            ('thu', 'Thursday'),
-            ('fri', 'Friday'),
-            ('sat', 'Saturday'),
-            ('sun', 'Sunday'),
+            ('Monday', 'Monday'),
+            ('Tuesday', 'Tuesday'),
+            ('Wednesday', 'Wednesday'),
+            ('Thursday', 'Thursday'),
+            ('Friday', 'Friday'),
+            ('Saturday', 'Saturday'),
+            ('Sunday', 'Sunday'),
         ]
     
     name=models.CharField(max_length=255)

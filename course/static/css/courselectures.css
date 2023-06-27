@@ -72,3 +72,28 @@ h1{
 .btn:hover{
     background-color: #c6ebf6;
 }
+
+.add-lecture-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    background-color: #98d5e7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+    margin-left: 36px;
+  }
+  
+  .add-lecture-button .button-icon {
+    margin-right: 5px;
+  }
+  
+  .add-lecture-button:hover {
+    background-color: #7ac6dc;
+  }
+  

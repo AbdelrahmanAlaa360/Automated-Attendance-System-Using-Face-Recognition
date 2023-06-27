@@ -11,7 +11,8 @@ urlpatterns = [
     path('instructor-dashboard/', views.instructor_dashboard,name='instructor-dashboard'),
     path('student-dashboard/', views.student_dashboard,name='student-dashboard'),
     path('course-detail/<int:pk>/', views.student_course_detail,name='student-coruse-detail'),
-    path('profile/', views.instructor_profile,name='instructor-profile'),
+    path('profile/', views.profile,name='instructor-profile'),
     path('join-course/', views.join_course,name='join-course'),
+    path('schedule/', views.schedule,name='schedule'),
 ]
 

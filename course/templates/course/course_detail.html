@@ -6,14 +6,19 @@
     <title>Course Lectures</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'css/courselectures.css' %}">
+    <script src="https://kit.fontawesome.com/216645962a.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
     <div class="container">
       <h1>{{object.name}} Lectures</h1>
-      <button class="new_lecture" id="newCourse">New Lecture</button>
-        {% for lecture in object.lecture.all %}
-        
+
+      <button class="add-lecture-button" id="newCourse">
+  <span class="button-icon"><i class="fas fa-book"></i></span>
+        Start New Lecture
+      </button>
+              
+      {% for lecture in object.lecture.all %}
         <div class="new-course">
       </div>
         <div class="lectures">

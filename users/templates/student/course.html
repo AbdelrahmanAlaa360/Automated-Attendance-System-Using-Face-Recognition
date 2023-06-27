@@ -59,6 +59,13 @@
                     {% endfor %}    
 
                 </ul>
+                <div style="position: fixed; bottom: 15px; left: 10px;width:18%;">
+                    <hr style="width: 105%;margin-bottom: 8px;">
+                    <button class="scheduled-button" id="scheduled-button-id">
+                        <span class="icon"><i class="far fa-calendar-alt"></i></span>
+                        Scheduled
+                      </button>
+                </div>
             </div>
         </div>
         <div class="right">
@@ -136,10 +143,16 @@
         </div>
    </div>
    <script>
-            const toProfile = document.getElementById('toProfile');
+        const toProfile = document.getElementById('toProfile');
         toProfile.addEventListener('click', () => {
             window.location.href = "{% url 'instructor-profile' %}";
         });
+
+        const toSchedulePage = document.getElementById('scheduled-button-id');
+        toSchedulePage.addEventListener('click', () => {
+            window.location.href = "{% url 'schedule' %}";
+        });
+
    </script>
 </body>
 </html>

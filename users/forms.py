@@ -17,7 +17,9 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 class ProfileImageForm(forms.Form):
     image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+    image.label = ''
 
 
 class TrainingImageForm(forms.Form):
     images = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'form-control-file', 'multiple': True}), required=False)
+    images.label = 'select your images carefully'
