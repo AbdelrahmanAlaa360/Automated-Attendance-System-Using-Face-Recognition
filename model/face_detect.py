@@ -87,14 +87,14 @@ while(time.time() < future):
 
     # Display the resulting image
     cv2.imshow('Video', frame)
-    # Hit 'q' on the keyboard to quit!
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
     cnt += 1
     video_capture.grab()
 
+# Save frame to retrain model
 cv2.imwrite("D:\Projects\Automated-Attendance-System-Using-Face-Recognition\media\profile_pics\%s\%s.jpg" % (name, int(time.time())), tempFrame)
-# Release handle to the webcam
+# Release the webcam
 video_capture.release()
 cv2.destroyAllWindows()
 
