@@ -57,8 +57,8 @@ def logout_view(request):
 
 
 
-def view404(request):
-    return render(request,'404page.html')
+def view404(request,exception=None):
+    return render(request,'404page.html',status=404)
 
 
 
@@ -104,7 +104,7 @@ def student_dashboard(request):
         lecture_names.append(lecture.name)
         lecture_course.append(lecture.course.name)
         lecture_date.append(lecture.data)
-        lecture_type.append("fix me")
+        lecture_type.append(lecture.course.type)
         lecture_status.append(request.user in lecture.user.all())
     context['lecture_names']=lecture_names
     context['lecture_course']=lecture_course
@@ -173,9 +173,13 @@ def join_course(request):
     if request.method=='POST':
 
         code=request.POST.get('code')
+        course=None
         if code:
-            course=get_object_or_404(Course,code=code)
-            request.user.courses.add(course)
+            try:
+                course = Course.objects.get(code=code)
+                request.user.courses.add(course)
+            except:
+                pass
         return redirect('student-dashboard')
     return render(request,'student/index.html')
 

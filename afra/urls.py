@@ -15,12 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path,include,re_path
 from django.conf.urls.static import static
 from django.conf import settings
 from users import views
+from django.conf.urls import handler404
+from django.shortcuts import render
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
     path('course/', include('course.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404='users.views.view404'
+
+# Custom 404 page
+def handler_404(request, exception=None):
+    return render(request, '404page.html', status=404)
+
+# URL pattern to handle unmatched URLs
+urlpatterns += [
+    re_path(r'^.*$', handler_404),
+]
