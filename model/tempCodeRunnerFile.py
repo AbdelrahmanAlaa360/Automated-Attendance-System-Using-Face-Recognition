@@ -1,1 +1,1 @@
-"D:\Proj
+print(top, left, right, bottom)

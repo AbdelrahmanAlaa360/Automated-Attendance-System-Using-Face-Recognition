@@ -2,6 +2,7 @@ import face_recognition
 import cv2
 import numpy as np
 import time
+import random
 from train_model import train_on_dataset
 start = time.time()
 
@@ -31,6 +32,7 @@ cnt=0
 now = time.time()
 video_duration = 20
 future = now + video_duration
+exist = True
 while(time.time() < future):
     # Get a single frame of video
     ret, frame = video_capture.read()
@@ -40,7 +42,7 @@ while(time.time() < future):
     if process_this_frame:
         # Resize frame of video to 1/4 size for faster face recognition processing
         small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
-        
+
         # Convert the image from BGR color (which OpenCV uses) to RGB color (which face_recognition uses)
         rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
         
@@ -71,7 +73,10 @@ while(time.time() < future):
         right *= 4
         bottom *= 4
         left *= 4
-
+        if exist :
+            tempFrame = frame[top:left, bottom-35:right]
+            print(top, left, right, bottom)
+            exist = False
         # Draw a box around the face
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
 
@@ -82,13 +87,14 @@ while(time.time() < future):
 
     # Display the resulting image
     cv2.imshow('Video', frame)
-    # Hit 'q' on the keyboard to quit!
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
     cnt += 1
     video_capture.grab()
 
-# Release handle to the webcam
+# Save frame to retrain model
+cv2.imwrite("D:\Projects\Automated-Attendance-System-Using-Face-Recognition\media\profile_pics\%s\%s.jpg" % (name, int(time.time())), tempFrame)
+# Release the webcam
 video_capture.release()
 cv2.destroyAllWindows()
 
