@@ -4,6 +4,7 @@ from .models import Course,Lecture
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 from users.models import User
+from django.urls import reverse
 import subprocess
 from django.views.generic import (
     ListView,
@@ -38,11 +39,12 @@ class LectureDetailView(DetailView):
 
 @user_passes_test(lambda u: u.is_authenticated and u.is_teacher,login_url='404')
 def start_model(request, id):
-    #command = ['python', 'E:/GP github/automation-face-attendance/model/face_detect.py']
-    command = ['python', 'D:/Projects/Automated-Attendance-System-Using-Face-Recognition/model/face_detect.py']
+    command = ['python', 'E:/GP github/v2/automation-face-attendance/model/face_detect.py']
+    #command = ['python', 'D:/Projects/Automated-Attendance-System-Using-Face-Recognition/model/face_detect.py']
     subprocess.run(command)
     course = Course.objects.get(id = id)
-    with open('D:/Projects/Automated-Attendance-System-Using-Face-Recognition/attendance.txt', 'r') as file:
+    #with open('D:/Projects/Automated-Attendance-System-Using-Face-Recognition/attendance.txt', 'r') as file:
+    with open('E:/GP github/v2/automation-face-attendance/attendance.txt', 'r') as file:
         lines = file.readlines()
         users = []
         for line in lines:
@@ -52,8 +54,11 @@ def start_model(request, id):
                 continue
             else:
                 user = User.objects.get(username = line)
-                users.append(user)
+                if user in course.user.all():
+                    users.append(user)
     lecture = Lecture.objects.create(name = "Lecture" , course = course)
     lecture.user.set(users)
+    lecture_pk=lecture.id 
     print(course)
-    return render(request,'course/modlePage.html')
+    url = reverse('lecture-detail', args=[lecture_pk])
+    return redirect(url)

@@ -97,3 +97,45 @@ h1{
     background-color: #7ac6dc;
   }
   
+    .attendance-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #12566a;
+    color: #fff;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.attendance-button:hover {
+    background-color: #98d5e7
+}
+
+.attendance-button i {
+    margin-right: 5px;
+}
+
+.back-button {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #12566a;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .back-button i {
+    margin-right: 5px;
+  }
+
+  .back-button:hover {
+    background-color: #3498db;
+  }

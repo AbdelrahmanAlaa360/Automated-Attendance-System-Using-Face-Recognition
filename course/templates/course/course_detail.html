@@ -26,11 +26,15 @@
                     <span class="name"> {{lecture.name}}</span>
                     <span class="date"> {{lecture.data}}</span>
                     <span class="attendance"> {{lecture.user.count}}/{{course.user.count|add:"-1"}}</span>
-                    <a href="{% url 'lecture-detail' pk=lecture.pk %}" class="btn">&gt</a>
+                    <a href="{% url 'lecture-detail' lecture.id %}" class="btn attendance-button">
+                      <i class="fas fa-user"></i> Attendance
+                  </a>
                 </div>
        </div>
+
        {% endfor %} 
     </div>
+    <a href="{% url 'instructor-dashboard' %}" class="back-button"><i class="fas fa-arrow-left"></i>Back</a>
     <script>
       const newCourseBtn = document.getElementById('newCourse');
       newCourseBtn.addEventListener('click', () => {

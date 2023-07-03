@@ -31,7 +31,7 @@ names = set()
 capturedFrames = set()
 cnt=0
 now = time.time()
-video_duration = 30
+video_duration = 10
 future = now + video_duration
 exist = True
 while(time.time() < future):

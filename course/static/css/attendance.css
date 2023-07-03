@@ -74,3 +74,24 @@ h1{
 #back a:active{
     color: black;
 }
+.back-button {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #12566a;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .back-button i {
+    margin-right: 5px;
+  }
+
+  .back-button:hover {
+    background-color: #3498db;
+  }

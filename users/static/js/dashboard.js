@@ -18,33 +18,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  function updateProgress(value,  name) {
-    const progressBar = document.querySelector(name);
-    progressBar.style.width = value + '%';
-  }
-  
-  updateProgress(45,'.progress1'); // sets progress to 50%
-  updateProgress(15,'.progress2');
-  updateProgress(25,'.progress3');
-  
-  const createCourseButton = document.querySelector('#newCourse');
-  createCourseButton.addEventListener('click', () => {
-    window.open('CourseCreation.html', 'newPage', 'height=700,width=800,resizable=no,top=50,left=400');
-  });
-  
-  const lecturesView = document.querySelector('.course .text');
-  lecturesView.addEventListener('click', () => {
-    window.open('courselectures.html', 'newPage', 'height=600,width=800,resizable=no,top=100,left=200');
-  
-  });
-  
-  const attendanceView  = document.querySelector('#btn');
-  attendanceView.addEventListener('click', () => {
-    window.open('attendance.html', 'newPage', 'height=400,width=800,resizable=no,top=100,left=200');
-    
-  });
-  
 
+  const div = document.getElementsByClassName('course');
+  const text = document.getElementsByClassName('text');
+
+  const checkTextOverflow = () => {
+    const containerWidth = div.offsetWidth;
+    const textWidth = text.offsetWidth;
+    const fontSize = parseInt(window.getComputedStyle(text).fontSize);
+
+    if (textWidth > containerWidth) {
+      const newFontSize = fontSize - 1;
+      text.style.fontSize = newFontSize + 'px';
+      checkTextOverflow();
+    }
+  };
+
+  checkTextOverflow();
 
 });
 

@@ -63,14 +63,16 @@
                             <div class="courses">
                                 {% for course in courses %}
                                     <div class="course ">
+                                        
                                         <i class="fa-solid fa-laptop-code"></i>
                                         <div><a class="text" href="{% url 'course-detail' course.id %}">{{ course.name }}</a></div>
                                         <div class="day">{{course.sessionDay}}</div>
                                         <div class="time">{{course.seessionTime}}</div>
                                         <hr><br>
-                                        <span>place</span>
-                                        <div class="place">{{course.sessionPlace}}</div>
                                         <div class="">{{course.code}}</div>
+                                        <span>place</span>
+                                        <div class="place">{{course.sessionPlace}}
+                                        </div>
                                     </div>
                                 {% endfor %}
                         </div>
@@ -91,50 +93,32 @@
                                                 <span class="name"> {{lecture.course.name}}</span>
                                                 <span class="number"> {{lecture.name}}</span>
                                                 <span class="attendance"> {{lecture.user.all.count}}/{{lecture.course.user.all.count|add:"-1"}}</span>
-                                                <a href="{% url 'lecture-detail' lecture.id %}" >&gt;</a>
+                                                <a href="{% url 'lecture-detail' lecture.id %}" class="attendance-button">
+                                                    <i class="fas fa-user"></i> Attendance
+                                                </a>
                                         </div>
                                     {% endfor %}
                                 </div>
                             </section>
             
                             <section class="progress-view">
-                                    <div class="title">
-                                        <i class="fa-solid fa-gauge-high"></i>
-                                        <span>Progress</span>
-                                    </div>
-    
+                                <div class="title">
+                                    <i class="fa-solid fa-gauge-high"></i>
+                                    <span>Progress</span>
+                                </div>
+                            
+                                {% for course, progress_percentage in course_progress %}
                                     <div class="prog1">
                                         <div class="progress-bar">
-                                            <div class="progress1"></div>
+                                            <div class="progress1" style="width: {{progress_percentage}}%"></div>
                                         </div>
-    
+                            
                                         <div class="content">
-                                            <span class="name">Machine learning</span>                         
-                                            <span class="number">5/12</span>
+                                            <span class="name">{{ course.name }}</span>
+                                            <span class="number">{{ course.lecture.count }}/{{ course.totalNumberOfLectures }}</span>
                                         </div>
-                                </div>
-    
-                                <div class="prog2">
-                                        <div class="progress-bar">
-                                        <div class="progress2"></div>
-                                        </div>
-    
-                                        <div class="content">
-                                        <span class="name">Statictics</span>                         
-                                        <span class="number">2/12</span>
-                                        </div>       
-                                </div>
-    
-                                <div class="prog3">
-                                    <div class="progress-bar">
-                                    <div class="progress3"></div>
                                     </div>
-    
-                                    <div class="content">
-                                    <span class="name">Data Analysis</span>                         
-                                    <span class="number">3/12</span>
-                                    </div>
-    
+                                {% endfor %}
                             </section>
 
                         </div>

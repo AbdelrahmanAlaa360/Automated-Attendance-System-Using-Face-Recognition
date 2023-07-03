@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse_lazy
 from  .models import User , ProfileImage,TrainImage
 from course.models import Course,Lecture
+import math
 from django.views.generic import (
     DetailView,
 )
@@ -75,6 +76,13 @@ def instructor_dashboard(request):
     first_three_lectures = sorted_lectures[:3]
     context={'courses' : courses}
     context['lectures']=first_three_lectures
+    course_progress = []
+    for course in courses:
+        progress_percentage = math.floor((course.lecture.count() / course.totalNumberOfLectures) * 100)
+        course_progress.append((course, progress_percentage))
+    context['course_progress']=course_progress
+    print("hi")
+    print(course_progress)
     return render(request,'instructor/dashboard.html' ,context)
 
 @user_passes_test(lambda u: u.is_authenticated and u.is_student,login_url='404')
