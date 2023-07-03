@@ -10,7 +10,7 @@ start = time.time()
 train = 0
 if(train == 1):
     train_on_dataset()
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(1)
 
 known_face_encodings = np.load("face_encodings_numpy.npy")
 known_face_names = np.load("names_numpy.npy")
@@ -28,9 +28,10 @@ num_frames = int(num_frames)
 # Set the frame rate to 2 frames per second
 frame_rate = 2
 names = set()
+capturedFrames = set()
 cnt=0
 now = time.time()
-video_duration = 20
+video_duration = 30
 future = now + video_duration
 exist = True
 while(time.time() < future):
@@ -73,10 +74,14 @@ while(time.time() < future):
         right *= 4
         bottom *= 4
         left *= 4
-        if exist :
-            tempFrame = frame[top:left, bottom-35:right]
+        if name not in capturedFrames :
+            #tempFrame = frame[top:left, bottom-35:right]
+            tempFrame = frame[top:bottom, left:right]
+            # Save frame to retrain model
+            cv2.imwrite("D:\Projects\Automated-Attendance-System-Using-Face-Recognition\media\profile_pics\%s\%s.jpg" % (name, int(time.time())), tempFrame)
+            capturedFrames.add(name)
             print(top, left, right, bottom)
-            exist = False
+
         # Draw a box around the face
         cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
 
@@ -92,8 +97,6 @@ while(time.time() < future):
     cnt += 1
     video_capture.grab()
 
-# Save frame to retrain model
-cv2.imwrite("D:\Projects\Automated-Attendance-System-Using-Face-Recognition\media\profile_pics\%s\%s.jpg" % (name, int(time.time())), tempFrame)
 # Release the webcam
 video_capture.release()
 cv2.destroyAllWindows()
