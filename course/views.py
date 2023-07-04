@@ -4,8 +4,10 @@ from .models import Course,Lecture
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 from users.models import User
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 import subprocess
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from django.views.generic import (
     ListView,
     DetailView,
@@ -62,3 +64,24 @@ def start_model(request, id):
     print(course)
     url = reverse('lecture-detail', args=[lecture_pk])
     return redirect(url)
+
+class UpdateCourseView(UpdateView):
+    model = Course
+    fields = ['name', 'sessionHour', 'sessionDay', 'type', 'seessionTime',
+              'capturingTime', 'sessionPlace', 'totalNumberOfLectures']
+    template_name = 'course/course_update.html'
+    def get_success_url(self):
+        return reverse_lazy('course-detail', kwargs={'pk': self.object.pk})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['helper'] = self.get_form_helper()
+        return context
+
+    def get_form_helper(self):
+        helper = FormHelper()
+        helper.form_method = 'post'
+        helper.add_input(Submit('submit', 'Update Course'))
+        helper.form_class = 'form-horizontal'
+        helper.label_class = 'col-lg-20'
+        helper.field_class = 'col-lg-10'
+        return helper

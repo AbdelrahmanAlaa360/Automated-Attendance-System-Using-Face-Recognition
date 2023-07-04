@@ -11,7 +11,11 @@
 
   <body>
     <div class="container">
-      <h1>{{object.name}} Lectures</h1>
+      <div class="header">
+        <h1>{{object.name}} Lectures</h1>
+        <a href="{% url 'course-update' object.id %}"> <i class="fas fa-edit"></i> Edit</a>
+
+      </div>
 
       <button class="add-lecture-button" id="newCourse">
   <span class="button-icon"><i class="fas fa-book"></i></span>
